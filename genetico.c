@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+//PARÂMETROS
 #define POPULACAO_TAM 20
 #define NUM_SELECIONADO_POR_GERACAO 2
 #define CHANCE_DE_MUTACAO 0.1
@@ -23,6 +25,7 @@ typedef struct populacao
 
 int compara_individuos(const void *a, const void *b)
 {
+    // FUNÇÃO AUXILIAR PARA ORDENAÇÃO DA POPULAÇÃO
     individuo *ind_a = (individuo *)a;
     individuo *ind_b = (individuo *)b;
     if (ind_a->fitness > ind_b->fitness)
@@ -126,7 +129,7 @@ void mutacao(individuo *ind)
 {
     for (int i = 0; i < 3; i++)
     {
-        if ((rand() % 100) / 100.0 < CHANCE_DE_MUTACAO)
+        if (((rand() % 100) / 100.0) < CHANCE_DE_MUTACAO)
         {
             ind->cromossomo[i] = rand() % 255;
         }
@@ -161,7 +164,6 @@ void algoritmo_genetico(populacao *atual)
     populacao* melhor_pop;
     while(geracao < MAXIMO_GERACOES && atual->qualidade > CRITERIO_DE_QUALIDADE)
     {
-        // printf("GERACAO %d - QUALIDADE: %.2f\n", atual->num_geracao, atual->qualidade);
         cria_nova_geracao(atual);
         geracao++;
     }
